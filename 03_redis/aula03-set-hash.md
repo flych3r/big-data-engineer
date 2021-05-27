@@ -110,7 +110,7 @@ nome – Augusto, estado – SP, views – 10
 
 ### 6. Incrementar em 2 o valor do campo views
 
-`hincrby usuario:100 views`
+`hincrby usuario:100 views 2`
 
 ### 7. Visualizar apenas os campos
 

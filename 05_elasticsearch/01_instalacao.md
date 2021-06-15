@@ -4,7 +4,7 @@
 
 - `$ docker-compose pull`
 
-## 2. Setar na máquina o vm.max_map_count com no mínimo 262144
+## 2. Setar na máquina o `vm.max_map_count` com no mínimo 262144
 
 - `https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_set_vm_max_map_count_to_at_least_262144`
 - `$ sudo sysctl -w vm.max_map_count=262144`
@@ -12,7 +12,7 @@
 ## 3. Criar a pasta de volume com permissão para acesso pelo container
 
 - `$ sudo mkdir -p ./data`
-- `sudo chmod 777 -R ./data`
+- `$ sudo chmod 777 -R ./data`
 
 ## 4. Iniciar o cluster Elastic através do docker-compose
 

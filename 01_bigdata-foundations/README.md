@@ -3,25 +3,25 @@
 
 Ambiente para estudo dos principais frameworks big data em docker.
 <br> Esse setup vai criar dockers com os frameworks HDFS, HBase, Hive, Presto, Spark, Jupyter, Hue, Mongodb, Metabase, Nifi, kafka, Mysql e Zookeeper.
-<br>  
+<br>
 
 ## SETUP
 *OBS: Esse passo deve ser realizado apena uma vez. Após o ambiente criado, utilizar o docker-compose para iniciar os containers como mostrado no tópico INICIANDO O AMBIENTE*
 
 #### Criação do diretório docker:
 *OBS: A criação do diretório é importante para os mapeamentos necessários*
-          
+
    * No Linux:
       * Criar o diretório na home do usuário
         ex: /home/user/docker
 
 #### Em um terminal/DOS, dentro diretório docker, realizar o clone do projeto no github
           git clone https://github.com/rodrigo-reboucas/docker-bigdata.git
-          
+
 ## INICIANDO O AMBIENTE
-   
+
 ### No terminal, no diretorio bigdata_docker, executar o docker-compose
-          docker-compose up -d        
+          docker-compose up -d
 
 ### Verificar imagens
           docker image ls
@@ -29,19 +29,19 @@ Ambiente para estudo dos principais frameworks big data em docker.
 ### Verificar containers
           docker container ls
 
-## SOLUCIONANDO PROBLEMAS 
+## SOLUCIONANDO PROBLEMAS
 
 ### Parar um containers
-         docker stop [nome do container]      
+         docker stop [nome do container]
 
 ### Parar todos containers
          docker stop $(docker ps -a -q)
-  
+
 ### Remover um container
          docker rm [nome do container]
 
 ### Remover todos containers
-         docker rm $(docker ps -a -q)         
+         docker rm $(docker ps -a -q)
 
 ### Dados do containers
          docker container inspect [nome do container]
@@ -50,13 +50,13 @@ Ambiente para estudo dos principais frameworks big data em docker.
          docker-compose up -d [nome do container]
 
 ### Iniciar todos os containers
-         docker-compose up -d 
+         docker-compose up -d
 
 ### Acessar log do container
-         docker container logs [nome do container] 
+         docker container logs [nome do container]
 
 ## Acesso WebUI dos Frameworks
- 
+
 * HDFS *http://localhost:50070*
 * Presto *http://localhost:8080*
 * Hbase *http://localhost:16010/master-status*
@@ -81,7 +81,7 @@ Ambiente para estudo dos principais frameworks big data em docker.
    ##### Sqoop
 
           docker exec -it datanode bash
-        
+
    ##### Kafka
 
           docker exec -it kafka bash
@@ -107,18 +107,18 @@ Ambiente para estudo dos principais frameworks big data em docker.
 
    ##### Metabase
     Usuário: bigdata@class.com
-    Senha: bigdata123 
+    Senha: bigdata123
 
    ##### MySQL
     Usuário: root
     Senha: secret
-   
+
    ##### MongoDB
     Usuário: root
     Senha: root
     Authentication Database: admin
 
-## Imagens   
+## Imagens
 
 [Docker Hub](https://hub.docker.com/u/fjardim)
 

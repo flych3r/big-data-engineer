@@ -122,6 +122,24 @@ services:
         limits:
           memory: 500m
 
+  kafka:
+    image: fjardim/kafka
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    volumes:
+      - ../volumes/data/kafka:/kafka/kafka-logs-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+
   hbase-master:
     image: fjardim/hbase-master
     container_name: hbase-master
@@ -139,10 +157,58 @@ services:
         limits:
           memory: 500m
 
-  spark:
+  mongo:
+    image: fjardim/mongo
+    container_name: mongo
+    hostname: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+    volumes:
+      - ../volumes/data/mongo:/data
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+
+  mongo-express:
+    image: fjardim/mongo-express
+    container_name: mongo_express
+    hostname: mongo_express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_SERVER: mongo
+    deploy:
+      resources:
+        limits:
+          memory: 200m
+
+  kafkamanager:
+    image: fjardim/kafkamanager
+    container_name: kafkamanager
+    hostname: kafkamanager
+    environment:
+      ZK_HOSTS: zookeeper:2181
+    ports:
+      - 9000:9000
+    depends_on:
+      - kafka
+    deploy:
+      resources:
+        limits:
+          memory: 200m
+
+  jupyter-spark:
     image: fjardim/jupyter-spark
-    hostname: spark
-    container_name: spark
+    hostname: jupyter-spark
+    container_name: jupyter-spark
     command: notebook
     env_file:
       - ../volumes/data/jupyter/jupyter.env

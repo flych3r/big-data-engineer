@@ -8,8 +8,8 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data:/data/db
-      - ../input:/input/
+      - ../volumes/data:/data/db
+      - ../volumes/input:/input/
 
   mongo-express:
     image: mongo-express

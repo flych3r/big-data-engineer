@@ -7,8 +7,8 @@ services:
       - "9200:9200"
     volumes:
       - ./settings/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-      - ./data:/usr/share/elasticsearch/data
-      - ../input:/input
+      - ../volumes/data:/usr/share/elasticsearch/data
+      - ../volumes/input:/input
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:

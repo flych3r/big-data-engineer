@@ -7,8 +7,8 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./data:/data
-      - ../input:/input
+      - ../volumes/data:/data
+      - ../volumes/input:/input
     entrypoint: redis-server --appendonly yes
     restart: unless-stopped
 

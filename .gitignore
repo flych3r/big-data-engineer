@@ -2,4 +2,4 @@ data/
 db/
 input/
 *beat*/
-volumes/
+volumes*

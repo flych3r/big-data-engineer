@@ -161,7 +161,6 @@ services:
     image: fjardim/mongo
     container_name: mongo
     hostname: mongo
-    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
@@ -178,7 +177,6 @@ services:
     image: fjardim/mongo-express
     container_name: mongo_express
     hostname: mongo_express
-    restart: always
     ports:
       - 8081:8081
     environment:

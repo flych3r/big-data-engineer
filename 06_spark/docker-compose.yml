@@ -25,7 +25,6 @@ services:
     hostname: datanode
     volumes:
       - ../volumes/data/hdfs/datanode:/hadoop/dfs/data
-      #- ../volumes/data/hadoop/bank:/bank
     env_file:
       - ../volumes/data/hadoop/hadoop-hive.env
     environment:
@@ -88,27 +87,6 @@ services:
         limits:
           memory: 500m
 
-  database:
-    image: fjardim/mysql
-    container_name: database
-    hostname: database
-    ports:
-        - "33061:3306"
-    deploy:
-      resources:
-        limits:
-          memory: 500m
-    command: mysqld --innodb-flush-method=O_DSYNC --innodb-use-native-aio=OFF --init-file /data/application/init.sql
-    volumes:
-        - ../volumes/data/mysql/data:/var/lib/mysql
-        - ../volumes/data/mysql/init.sql:/data/application/init.sql
-    environment:
-        MYSQL_ROOT_USER: root
-        MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: hue
-        MYSQL_USER: root
-        MYSQL_PASSWORD: secret
-
   zookeeper:
     image: fjardim/zookeeper
     container_name: zookeeper
@@ -139,54 +117,6 @@ services:
       resources:
         limits:
           memory: 500m
-
-  hbase-master:
-    image: fjardim/hbase-master
-    container_name: hbase-master
-    hostname: hbase-master
-    env_file:
-      - ../volumes/data/hbase/hbase-standalone.env
-    environment:
-      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 zookeeper:2181"
-    ports:
-      - 16010:16010
-    depends_on:
-      - namenode
-    deploy:
-      resources:
-        limits:
-          memory: 500m
-
-  mongo:
-    image: fjardim/mongo
-    container_name: mongo
-    hostname: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - 27017:27017
-    volumes:
-      - ../volumes/data/mongo:/data
-    deploy:
-      resources:
-        limits:
-          memory: 500m
-
-  mongo-express:
-    image: fjardim/mongo-express
-    container_name: mongo_express
-    hostname: mongo_express
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_SERVER: mongo
-    deploy:
-      resources:
-        limits:
-          memory: 200m
 
   kafkamanager:
     image: fjardim/kafkamanager
